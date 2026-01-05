@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Přihláška do klubu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay">
+    <div class="form-box">
+        <h1>Přihláška do klubu</h1>
+
+        <form id="doraznicek" action="https://formsubmit.co/dhusnik@spskt.cz" method="POST" novalidate>
+
+            <!-- FormSubmit konfigurace -->
+            <input type="hidden" name="_subject" value="Nová přihláška – Klub pokročilé akademické reflexe">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <label>Přezdívka *</label>
+            <input type="text" name="Prezdivka" required>
+
+            <label>Počet ukončených semestrů</label>
+            <input type="number" name="Semestry">
+
+            <label>Číslo oblíbených dveří</label>
+            <input type="text" name="Dvere" placeholder="UN533">
+
+            <label>Oblíbený typ matice</label>
+            <select name="Matice">
+                <option>symetrická</option>
+                <option>diagonální</option>
+                <option>náhodná</option>
+            </select>
+
+            <label>Vztah ke kvadratickým formám</label>
+            <input type="range" name="Vztah" min="0" max="100" value="50" id="vztah">
+            <span id="rangeValue">50</span>
+
+            <label>Dokážu rozlišit</label>
+            <select name="Rozliseni" multiple>
+                <option>pozitivně definitní</option>
+                <option>semidefinitní</option>
+                <option>indefinitní</option>
+                <option>záleží na náladě</option>
+            </select>
+
+            <label>Obrázek testu z lineární algebry</label>
+            <input type="file" name="Test">
+
+            <label>Email</label>
+            <input type="email" id="email1" name="Email">
+
+            <label>Email pro kontrolu *</label>
+            <input type="email" id="email2" required>
+
+            <p id="warning" class="warning">⚠ Emaily se neshodují!</p>
+
+            <div class="buttons">
+                <button type="submit">Odeslat přihlášku</button>
+                <button type="reset">Reset</button>
+            </div>
+        </form>
+
+        <p class="info">Výsledky se přijímají na váš email.</p>
+    </div>
+</div>
+
+<script>
+    const slider = document.getElementById("vztah");
+    const output = document.getElementById("rangeValue");
+    const email1 = document.getElementById("email1");
+    const email2 = document.getElementById("email2");
+    const warning = document.getElementById("warning");
+
+    output.textContent = slider.value;
+    slider.oninput = () => output.textContent = slider.value;
+
+    function checkEmails() {
+        warning.style.display =
+            email1.value && email2.value && email1.value !== email2.value
+            ? "block"
+            : "none";
+    }
+
+    email1.addEventListener("input", checkEmails);
+    email2.addEventListener("input", checkEmails);
+</script>
+
+</body>
+</html>
