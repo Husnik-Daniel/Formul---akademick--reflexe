@@ -7,16 +7,22 @@
 </head>
 <body>
 
+<div class="car">
+    <div class="car-face">🚗</div>
+</div>
+
 <div class="overlay">
-    <div class="form-box">
+    <div class="form-box gear-box">
+        <div class="gear"></div>
+
         <h1>Přihláška do klubu</h1>
 
         <form id="doraznicek" action="https://formsubmit.co/dhusnik@spskt.cz" method="POST" novalidate>
 
-            <!-- FormSubmit konfigurace -->
             <input type="hidden" name="_subject" value="Nová přihláška – Klub pokročilé akademické reflexe">
             <input type="hidden" name="_captcha" value="false">
             <input type="hidden" name="_template" value="table">
+
             <label>Přezdívka *</label>
             <input type="text" name="Prezdivka" required>
 
@@ -45,9 +51,6 @@
                 <option>záleží na náladě</option>
             </select>
 
-            <label>Obrázek testu z lineární algebry</label>
-            <input type="file" name="Test">
-
             <label>Email</label>
             <input type="email" id="email1" name="Email">
 
@@ -57,35 +60,13 @@
             <p id="warning" class="warning">⚠ Emaily se neshodují!</p>
 
             <div class="buttons">
-                <button type="submit">Odeslat přihlášku</button>
-                <button type="reset">Reset</button>
+                <button type="submit" class="submit-btn">Odeslat přihlášku</button>
+                <button type="reset" class="reset-btn" id="resetBtn">Reset</button>
             </div>
         </form>
-
-        <p class="info">Výsledky se přijímají na váš email.</p>
     </div>
 </div>
 
-<script>
-    const slider = document.getElementById("vztah");
-    const output = document.getElementById("rangeValue");
-    const email1 = document.getElementById("email1");
-    const email2 = document.getElementById("email2");
-    const warning = document.getElementById("warning");
-
-    output.textContent = slider.value;
-    slider.oninput = () => output.textContent = slider.value;
-
-    function checkEmails() {
-        warning.style.display =
-            email1.value && email2.value && email1.value !== email2.value
-            ? "block"
-            : "none";
-    }
-
-    email1.addEventListener("input", checkEmails);
-    email2.addEventListener("input", checkEmails);
-</script>
-
+<script src="animace.js"></script>
 </body>
 </html>
